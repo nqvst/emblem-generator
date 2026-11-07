@@ -10,8 +10,11 @@ import { mountSlots, mountSwatches } from './ui/colors.ts'
 import { mountPaletteBrowser } from './ui/palette-browser.ts'
 import { mountPreview } from './ui/preview.ts'
 import { mountRandomize, mountSave, mountSecondaryToggle } from './ui/actions.ts'
+import { fromQuery } from './model/permalink.ts'
+import { mountCopyLink, mountUrlSync } from './ui/permalink.ts'
+import { mountOpenEmblem } from './ui/open-emblem.ts'
 
-const store = createStore<AppState>({
+const defaults: AppState = {
   emblem: emblems[0].name,
   background: byName(backgrounds, 'Circle').name,
   colors: { primary: '#9c3433', secondary: '#dedede', background: '#656565' }, // Halo 3 Red, White, Steel
@@ -19,14 +22,15 @@ const store = createStore<AppState>({
   palette: palettes[0].name,
   category: palettes[0].category,
   slot: 'primary',
-})
+}
+const names = { emblems: emblems.map(({ name }) => name), backgrounds: backgrounds.map(({ name }) => name) }
+const store = createStore<AppState>({ ...defaults, ...fromQuery(location.search, names, defaults) }) // shared links
 
 const layersOf = (state: AppState) =>
   drawLayers(state, byName(emblems, state.emblem), byName(backgrounds, state.background))
 const nameOf = (hex: string, state: AppState) => colorName(hex, byName(palettes, state.palette), palettes)
 const randomize = () => randomDesign({
-  emblems: emblems.map(({ name }) => name),
-  backgrounds: backgrounds.map(({ name }) => name),
+  ...names,
   colors: byName(palettes, store.get().palette).colors.map(([, hex]) => hex),
 }, Math.random)
 
@@ -48,3 +52,7 @@ mountPreview(store, { canvas: byId<HTMLCanvasElement>('preview'), caption: byId(
 mountSecondaryToggle(byId<HTMLInputElement>('show-secondary'), store)
 mountRandomize(byId<HTMLButtonElement>('randomize'), store, randomize)
 mountSave(byId<HTMLButtonElement>('save'), store, layersOf)
+mountCopyLink(byId<HTMLButtonElement>('copy-link'), store)
+mountUrlSync(store)
+mountOpenEmblem({ button: byId<HTMLButtonElement>('open'), status: byId('status') }, (query) =>
+  store.set(fromQuery(query, names, store.get())))

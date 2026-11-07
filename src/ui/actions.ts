@@ -1,6 +1,8 @@
 import type { AppState, DrawLayer } from '../model/design.ts'
 import type { Store } from '../model/store.ts'
 import { fileName } from '../model/design.ts'
+import { IMAGE_KEYWORD, toQuery } from '../model/permalink.ts'
+import { withText } from '../model/png-text.ts'
 import { el } from '../dom.ts'
 import { renderEmblem } from '../render.ts'
 import { track } from '../analytics.ts'
@@ -41,7 +43,13 @@ async function download(state: AppState, layers: DrawLayer[]) {
     canvas.toBlob(resolve, 'image/png')
   })
   if (!blob) throw new Error('Canvas could not be encoded as PNG')
-  const link = el('a', { href: URL.createObjectURL(blob), download: fileName(state) })
+  // The settings ride along inside the file, so dropping it back on the page reopens the design.
+  const png = withText(new Uint8Array(await blob.arrayBuffer()), {
+    [IMAGE_KEYWORD]: toQuery(state),
+    Software: `Halo 3 Emblem Generator ${location.origin}${location.pathname}`,
+  })
+  const file = new Blob([png], { type: 'image/png' })
+  const link = el('a', { href: URL.createObjectURL(file), download: fileName(state) })
   link.click()
   setTimeout(() => URL.revokeObjectURL(link.href), REVOKE_DELAY_MS)
 }

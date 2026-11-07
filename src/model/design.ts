@@ -2,7 +2,7 @@ import type { Background, Emblem } from './catalog.ts'
 
 export type ColorSlot = 'primary' | 'secondary' | 'background'
 export const COLOR_SLOTS: ColorSlot[] = ['primary', 'secondary', 'background']
-type Colors = Record<ColorSlot, string>
+export type Colors = Record<ColorSlot, string>
 
 export interface AppState {
   emblem: string // emblem name
@@ -33,8 +33,12 @@ export function drawLayers(state: AppState, emblem: Emblem, background: Backgrou
   return layers
 }
 
+// URL- and file-safe form of a name: "Ball O'Fire" → "ball-o-fire".
+export function slug(name: string) {
+  return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
+}
+
 export function fileName(state: AppState) {
-  const slug = (text: string) => text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
   return `emblem-${slug(state.emblem)}-${slug(state.background)}.png`
 }
 

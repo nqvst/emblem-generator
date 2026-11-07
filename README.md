@@ -19,7 +19,7 @@ npm run check      # all of the above + build, same as CI
 
 | Path | What |
 | --- | --- |
-| `src/model/` | App logic with no DOM: state, catalog, palettes. Runs in the Node tests |
+| `src/model/` | App logic with no DOM: state, catalog, palettes, the design ⇄ URL format. Runs in the Node tests |
 | `src/ui/` | One component per panel. Each gets the store and its elements, nothing else |
 | `src/catalog.ts` | Everything on offer: artwork from `src/assets/`, palettes from `src/data/` |
 | `src/render.ts` | Draws the emblem: each layer is a mask filled with its colour |
@@ -28,6 +28,16 @@ npm run check      # all of the above + build, same as CI
 | `src/data/emblem-order.json` | Emblem display order (Halo 3's). Unlisted emblems go last, A–Z |
 | `index.html` | Page, SEO tags and the text below the tool. `{{placeholders}}` are filled by `vite.config.ts` |
 | `public/` | Social preview image and favicons, copied as-is |
+
+### Links
+
+The address bar always holds the design on screen, e.g.
+`?emblem=sol&background=circle&colors=1e3d2b-6a994e-f2e8cf` (primary, secondary, background; `&secondary=off`
+when that layer is hidden). Names are the emblem and background names in lowercase with dashes, so renaming an
+asset folder breaks old links to it.
+
+Saved PNGs carry the same query in a `halo3-emblem` text chunk (`src/model/png-text.ts`). Dropping one on the
+page, or "Open PNG", loads it. Sites that re-encode uploads (some chat apps, social networks) strip it.
 
 ### Adding things
 
@@ -62,7 +72,7 @@ The build reads these from the environment (CI) or a local `.env`:
 | `UMAMI_WEBSITE_ID` | none (analytics off) | Umami website id |
 | `UMAMI_SCRIPT_URL` | Umami Cloud | Only for self-hosted Umami |
 
-Analytics is cookie-free and anonymous: page views plus `download` (emblem, background, palette) and
-`randomize` events. It only counts visits on the real domain and honours Do Not Track.
+Analytics is cookie-free and anonymous: page views plus `download` (emblem, background, palette),
+`randomize`, `copy-link` and `open-image` events. The design in the URL is left out of page views. It only counts visits on the real domain and honours Do Not Track.
 
 Halo is a trademark of Microsoft. This is a fan-made tool, not affiliated with Microsoft, Bungie or Halo Studios.

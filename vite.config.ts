@@ -68,6 +68,7 @@ function catalogCounts() {
 }
 
 // Umami: cookie-free page views. Counts only on the real domain (not localhost) and honours Do Not Track.
+// The query string (the design, see src/model/permalink.ts) is left out, so editing an emblem isn't a page view.
 function analyticsTags(site: Site): HtmlTagDescriptor[] {
   if (!site.umamiId) return []
   return [{
@@ -79,6 +80,7 @@ function analyticsTags(site: Site): HtmlTagDescriptor[] {
       'data-website-id': site.umamiId,
       'data-domains': new URL(site.url).hostname,
       'data-do-not-track': 'true',
+      'data-exclude-search': 'true',
     },
   }]
 }
