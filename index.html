@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Halo 3 Emblem Generator – Create &amp; Download Halo Emblems (Free PNG)</title>
+<meta name="description" content="Make your own Halo 3 emblem online. Choose from all {{emblem_count}} Halo 3 emblems, {{background_count}} backgrounds and {{palette_count}} colour palettes, then download a free 512×512 PNG for your profile picture or Discord avatar.">
+<link rel="canonical" href="{{site_url}}">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0d1418">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Halo 3 Emblem Generator">
+<meta property="og:title" content="Halo 3 Emblem Generator – make your own Halo emblem">
+<meta property="og:description" content="All {{emblem_count}} Halo 3 emblems, {{background_count}} backgrounds and {{palette_count}} colour palettes. Download a free 512×512 PNG.">
+<meta property="og:url" content="{{site_url}}">
+<meta property="og:image" content="{{site_url}}og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Halo 3 Emblem Generator with example emblems">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Halo 3 Emblem Generator">
+<meta name="twitter:description" content="Make your own Halo 3 emblem and download it as a free 512×512 PNG.">
+<meta name="twitter:image" content="{{site_url}}og-image.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Halo 3 Emblem Generator",
+  "url": "{{site_url}}",
+  "description": "Free online tool to design Halo 3 style emblems from {{emblem_count}} emblems, {{background_count}} backgrounds and {{palette_count}} colour palettes, and download them as 512×512 PNG images.",
+  "applicationCategory": "DesignApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript",
+  "isAccessibleForFree": true,
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "image": "{{site_url}}og-image.png"
+}
+</script>
+</head>
+<body>
+<main>
+  <div class="app">
+    <div class="preview">
+      <h1>Halo 3 Emblem Generator</h1>
+      <p class="intro">Design your own Halo 3 emblem: pick an emblem, a background and colours, then download it as a 512×512 PNG. Free, no sign-up.</p>
+      <div class="stage"><canvas id="preview" role="img" aria-label="Emblem preview"></canvas></div>
+      <p class="caption" id="caption" aria-live="polite"></p>
+      <label class="toggle"><input type="checkbox" id="show-secondary" checked> Show secondary layer</label>
+      <div class="actions">
+        <button type="button" id="randomize">Randomize</button>
+        <button type="button" id="save" class="primary">Save 512×512 PNG</button>
+      </div>
+      <noscript><p class="intro">This tool needs JavaScript to draw emblems.</p></noscript>
+    </div>
+
+    <div class="controls">
+      <section aria-labelledby="foreground-heading">
+        <h2 id="foreground-heading">Foreground</h2>
+        <div class="grid" id="emblems"></div>
+      </section>
+      <section aria-labelledby="background-heading">
+        <h2 id="background-heading">Background</h2>
+        <div class="grid" id="backgrounds"></div>
+      </section>
+      <section class="colors" aria-labelledby="colors-heading">
+        <h2 id="colors-heading">Colors</h2>
+        <div class="slots" id="slots"></div>
+        <div class="tabs" id="categories"></div>
+        <div class="palettes" id="palettes"></div>
+        <p class="palette-meta" id="palette-meta"></p>
+        <div class="swatches" id="swatches"></div>
+      </section>
+    </div>
+  </div>
+
+  <article class="about">
+    <h2>How to make a Halo 3 emblem</h2>
+    <ol>
+      <li><b>Pick an emblem</b> – all {{emblem_count}} Halo 3 emblems, from Seventh Column and Sol to the numbers 0–9.</li>
+      <li><b>Pick a background</b> shape – {{background_count}} options, including the gradients and stripes.</li>
+      <li><b>Choose colours</b> for the primary, secondary and background layers. Use the original Halo 3 palette, one of {{palette_count}} palettes, or any custom colour.</li>
+      <li><b>Save</b> – download your emblem as a 512×512 PNG with a transparent background.</li>
+    </ol>
+
+    <h2>Colour palettes</h2>
+    <p>Besides the original Halo 3 armour colours, you can browse hand-picked emblem palettes, palettes taken from famous paintings (Van Gogh, Hokusai, Monet, Klimt), Wes Anderson films, Sanzo Wada's <i>Dictionary of Color Combinations</i>, Pantone Colors of the Year, retro consoles like the Game Boy and Commodore 64, and popular code-editor themes.</p>
+
+    <h2>FAQ</h2>
+    <h3>Is the Halo 3 Emblem Generator free?</h3>
+    <p>Yes. Everything runs in your browser, there is no account, and downloads are free.</p>
+    <h3>Can I use my emblem as a profile picture?</h3>
+    <p>Yes. The 512×512 PNG works well as a Discord, Steam, Xbox or forum avatar, or as a clan logo.</p>
+    <h3>Can I hide the secondary colour, like in Halo 3?</h3>
+    <p>Yes. Untick "Show secondary layer" to get the same result as the in-game toggle.</p>
+    <h3>Are these the official emblems?</h3>
+    <p>The artwork is a high-resolution fan recreation of the Halo 3 emblems, so it stays sharp at large sizes.</p>
+
+    <h2>Credits</h2>
+    <p>Emblem and background artwork: <i>Halo 3 High Resolution Emblem Pack</i> by SK CRISIS. Palettes: <a href="https://github.com/BlakeRMills/MetBrewer">MetBrewer</a>, <a href="https://github.com/karthik/wesanderson">wesanderson</a>, <a href="https://github.com/mattdesl/dictionary-of-colour-combinations">Dictionary of Colour Combinations</a>, <a href="https://lospec.com/palette-list">Lospec</a>, <a href="https://catppuccin.com">Catppuccin</a> and others.</p>
+  </article>
+</main>
+
+<footer>
+  Fan-made tool. Halo is a trademark of Microsoft Corporation. This site is not affiliated with or endorsed by Microsoft, Xbox, Bungie or Halo Studios.
+</footer>
+
+<script type="module" src="/src/main.ts"></script>
+</body>
+</html>
